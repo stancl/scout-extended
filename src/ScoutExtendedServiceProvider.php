@@ -130,5 +130,11 @@ final class ScoutExtendedServiceProvider extends ServiceProvider
 
             return $array;
         });
+
+        \Illuminate\Database\Eloquent\Builder::macro('getSearchableIndex', function () {
+            $client = $this->getModel()->searchableUsing()->getClient();
+
+            return $client->initIndex($this->getModel()->searchableAs());
+        });
     }
 }
